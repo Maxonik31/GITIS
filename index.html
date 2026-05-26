@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { margin: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: sans-serif; }
+        .cmds { margin-top: 20px; }
+        .status { position: fixed; bottom: 0; width: 100%; text-align: center; padding: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <button id="power">Вкл/Выкл</button>
+
+    <div class="cmds">
+        <button id="c1" disabled>Команда №1</button>
+        <button id="c2" disabled>Команда №2</button>
+        <button id="c3" disabled>Команда №3</button>
+    </div>
+
+    <div class="status" id="status">Статус: Выключено</div>
+
+    <script>
+        let on = false;
+        const p = document.getElementById('power');
+        const c1 = document.getElementById('c1');
+        const c2 = document.getElementById('c2');
+        const c3 = document.getElementById('c3');
+        const s = document.getElementById('status');
+
+        p.onclick = () => {
+            on = !on;
+            c1.disabled = !on;
+            c2.disabled = !on;
+            c3.disabled = !on;
+            s.textContent = on ? 'Статус: Включено' : 'Статус: Выключено';
+        };
+        c1.onclick = () => s.textContent = 'Статус: Выполнена команда №1';
+        c2.onclick = () => s.textContent = 'Статус: Выполнена команда №2';
+        c3.onclick = () => s.textContent = 'Статус: Выполнена команда №3';
+    </script>
+
+</body>
+</html>
