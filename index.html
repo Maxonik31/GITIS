@@ -27,16 +27,38 @@
         const c3 = document.getElementById('c3');
         const s = document.getElementById('status');
 
+        async function sendToServer(btn) {
+            await fetch('/api', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({button: btn})
+            });
+        }
+
         p.onclick = () => {
             on = !on;
             c1.disabled = !on;
             c2.disabled = !on;
             c3.disabled = !on;
-            s.textContent = on ? 'Статус: Включено' : 'Статус: Выключено';
+            s.textContent = on ? 'Статус: On' : 'Статус: Off';
+            
+            sendToServer(on ? 'power_on' : 'power_off');
         };
-        c1.onclick = () => s.textContent = 'Статус: Выполнена команда №1';
-        c2.onclick = () => s.textContent = 'Статус: Выполнена команда №2';
-        c3.onclick = () => s.textContent = 'Статус: Выполнена команда №3';
+        
+        c1.onclick = () => {
+            s.textContent = 'Статус: Выполнена команда №1';
+            sendToServer('cmd1');
+        };
+        
+        c2.onclick = () => {
+            s.textContent = 'Статус: Выполнена команда №2';
+            sendToServer('cmd2');
+        };
+        
+        c3.onclick = () => {
+            s.textContent = 'Статус: Выполнена команда №3';
+            sendToServer('cmd3');
+        };
     </script>
 
 </body>
