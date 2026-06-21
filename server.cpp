@@ -3,7 +3,7 @@
 #include <fstream>
 #include <winsock2.h>
 #include <ws2tcpip.h>
-
+// для компилирования - g++ server.cpp -lws2_32
 #pragma comment(lib, "ws2_32.lib")
 
 using namespace std;
@@ -41,9 +41,8 @@ int main() {
         if (req.find("POST") != string::npos) {
             if (req.find("power_on") != string::npos) last_button = "On";
             else if (req.find("power_off") != string::npos) last_button = "Off";
-            else if (req.find("cmd1") != string::npos) last_button = "comm №1";
-            else if (req.find("cmd2") != string::npos) last_button = "comm №2";
-            else if (req.find("cmd3") != string::npos) last_button = "comm №3";
+            else if (req.find("cmd1") != string::npos) last_button = "grab";
+            else if (req.find("cmd2") != string::npos) last_button = "release";
             
             cout << "press: " << last_button << endl;
             
